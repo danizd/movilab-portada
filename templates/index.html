@@ -84,10 +84,10 @@
         particlesJS("particles-js", {
             "particles": {
                 "number": {
-                    "value": 80,
+                    "value": 120,
                     "density": {
                         "enable": true,
-                        "value_area": 800
+                        "value_area": 600
                     }
                 },
                 "color": {
@@ -97,35 +97,35 @@
                     "type": "circle"
                 },
                 "opacity": {
-                    "value": 0.3,
+                    "value": 0.5,
                     "random": true,
                     "anim": {
                         "enable": true,
-                        "speed": 0.6,
-                        "opacity_min": 0.1,
+                        "speed": 1.2,
+                        "opacity_min": 0.2,
                         "sync": false
                     }
                 },
                 "size": {
-                    "value": 2,
+                    "value": 2.5,
                     "random": true,
                     "anim": {
                         "enable": true,
-                        "speed": 1.5,
-                        "size_min": 0.3,
+                        "speed": 2,
+                        "size_min": 0.5,
                         "sync": false
                     }
                 },
                 "line_linked": {
                     "enable": true,
-                    "distance": 150,
+                    "distance": 120,
                     "color": "#00f0ff",
-                    "opacity": 0.08,
+                    "opacity": 0.15,
                     "width": 1
                 },
                 "move": {
                     "enable": true,
-                    "speed": 0.6,
+                    "speed": 2.5,
                     "direction": "none",
                     "random": true,
                     "straight": false,
@@ -141,16 +141,20 @@
                         "mode": "grab"
                     },
                     "onclick": {
-                        "enable": false
+                        "enable": true,
+                        "mode": "push"
                     },
                     "resize": true
                 },
                 "modes": {
                     "grab": {
-                        "distance": 180,
+                        "distance": 200,
                         "line_linked": {
-                            "opacity": 0.2
+                            "opacity": 0.4
                         }
+                    },
+                    "push": {
+                        "particles_nb": 4
                     }
                 }
             },
