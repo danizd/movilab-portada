@@ -6,13 +6,13 @@
 
 :root {
     --cyan: #00f0ff;
-    --cyan-dim: #00f0ff33;
-    --cyan-glow: #00f0ff15;
-    --bg: #04060d;
-    --surface: #0a0e1a;
-    --surface-border: #111827;
-    --text: #e0e6ed;
-    --text-dim: #4a5568;
+    --cyan-dim: #00f0ff55;
+    --cyan-glow: #00f0ff20;
+    --bg: #060a12;
+    --surface: #0c1220;
+    --surface-border: #1e2a3a;
+    --text: #f0f4f8;
+    --text-dim: #8899aa;
     --accent: #00f0ff;
     --danger: #ff3b5c;
 }
@@ -89,7 +89,7 @@ header h1::after {
 
 .tagline {
     font-family: "JetBrains Mono", monospace;
-    color: var(--text-dim);
+    color: #8899aa;
     margin-top: 1rem;
     font-size: 0.8125rem;
     letter-spacing: 0.05em;
@@ -107,7 +107,7 @@ header h1::after {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--text-dim);
+    color: #8899aa;
     text-decoration: none;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
@@ -279,7 +279,7 @@ main {
 
 .card-content p {
     font-size: 0.75rem;
-    color: #8899aa;
+    color: #a0b0c0;
     line-height: 1.5;
     margin-bottom: 0.875rem;
     display: -webkit-box;
@@ -296,7 +296,7 @@ main {
 .links a {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.6875rem;
-    color: var(--text-dim);
+    color: #c0c8d0;
     text-decoration: none;
     padding: 0.35rem 0.625rem;
     border-radius: 4px;
@@ -341,7 +341,7 @@ main {
 }
 
 .empty-state p {
-    color: var(--text-dim);
+    color: #8899aa;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.8125rem;
 }
@@ -364,7 +364,7 @@ footer {
 footer p {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.6875rem;
-    color: var(--text-dim);
+    color: #8899aa;
     letter-spacing: 0.1em;
 }
 
@@ -434,7 +434,7 @@ footer p {
     margin-bottom: 0.5rem;
     font-family: "JetBrains Mono", monospace;
     font-size: 0.6875rem;
-    color: var(--text-dim);
+    color: #8899aa;
     font-weight: 500;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -528,7 +528,7 @@ button[type="button"]:hover {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
     margin-bottom: 1.5rem;
-    color: var(--text-dim);
+    color: #8899aa;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -538,7 +538,7 @@ button[type="button"]:hover {
     font-family: "JetBrains Mono", monospace;
     font-size: 0.75rem;
     margin-bottom: 1.25rem;
-    color: var(--text-dim);
+    color: #8899aa;
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -595,7 +595,7 @@ button[type="button"]:hover {
 
 .admin-item-info p {
     font-size: 0.8125rem;
-    color: var(--text-dim);
+    color: #8899aa;
     margin-bottom: 0.5rem;
 }
 
@@ -618,7 +618,7 @@ button[type="button"]:hover {
 
 .btn-edit {
     background: transparent;
-    color: var(--text-dim);
+    color: #8899aa;
     border: 1px solid var(--surface-border);
 }
 
