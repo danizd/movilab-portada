@@ -35,6 +35,7 @@ def init_db():
         CREATE TABLE IF NOT EXISTS projects (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
+            category TEXT,
             description TEXT,
             url TEXT,
             repo_url TEXT,
@@ -42,6 +43,10 @@ def init_db():
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
+    try:
+        conn.execute("ALTER TABLE projects ADD COLUMN category TEXT")
+    except sqlite3.OperationalError:
+        pass
     conn.commit()
     conn.close()
 
@@ -124,6 +129,7 @@ async def admin(request: Request):
 async def create_project(
     request: Request,
     title: str = Form(...),
+    category: str = Form(""),
     description: str = Form(""),
     url: str = Form(""),
     repo_url: str = Form(""),
@@ -150,8 +156,8 @@ async def create_project(
 
     conn = get_db()
     conn.execute(
-        "INSERT INTO projects (title, description, url, repo_url, image_url) VALUES (?, ?, ?, ?, ?)",
-        (title.strip(), description.strip(), url.strip() or None, repo_url.strip() or None, image_url),
+        "INSERT INTO projects (title, category, description, url, repo_url, image_url) VALUES (?, ?, ?, ?, ?, ?)",
+        (title.strip(), category.strip() or None, description.strip(), url.strip() or None, repo_url.strip() or None, image_url),
     )
     conn.commit()
     conn.close()
@@ -164,6 +170,7 @@ async def edit_project(
     request: Request,
     project_id: int,
     title: str = Form(...),
+    category: str = Form(""),
     description: str = Form(""),
     url: str = Form(""),
     repo_url: str = Form(""),
@@ -200,8 +207,8 @@ async def edit_project(
         image_url = filename
 
     conn.execute(
-        "UPDATE projects SET title = ?, description = ?, url = ?, repo_url = ?, image_url = ? WHERE id = ?",
-        (title.strip(), description.strip(), url.strip() or None, repo_url.strip() or None, image_url, project_id),
+        "UPDATE projects SET title = ?, category = ?, description = ?, url = ?, repo_url = ?, image_url = ? WHERE id = ?",
+        (title.strip(), category.strip() or None, description.strip(), url.strip() or None, repo_url.strip() or None, image_url, project_id),
     )
     conn.commit()
     conn.close()

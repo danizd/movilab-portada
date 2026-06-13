@@ -3,45 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Movilab</title>
+    <title>admin — movilab</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
     <header>
-        <h1>Movilab - Admin</h1>
-        <a href="/" class="btn-link">Ver landing</a>
+        <div class="logo-mark">//</div>
+        <h1>movilab<span class="accent">_admin</span></h1>
+        <div class="nav">
+            <a href="/" class="nav-link">
+                <span class="nav-dot" style="background: var(--cyan)"></span>
+                ver landing
+            </a>
+        </div>
     </header>
 
     <main>
         <section class="form-section">
-            <h2>Nuevo proyecto</h2>
+            <h2>// nuevo proyecto</h2>
             <form method="POST" action="/projects" enctype="multipart/form-data">
                 <div class="form-group">
-                    <label for="title">Título *</label>
-                    <input type="text" id="title" name="title" required maxlength="200">
+                    <label for="title">título *</label>
+                    <input type="text" id="title" name="title" required maxlength="200" placeholder="nombre del proyecto">
                 </div>
                 <div class="form-group">
-                    <label for="description">Descripción</label>
-                    <textarea id="description" name="description" rows="3"></textarea>
+                    <label for="category">categoría</label>
+                    <input type="text" id="category" name="category" placeholder="ej: BI_ANALYSIS, REALTIME_FLOW, API, CLI" maxlength="50">
                 </div>
                 <div class="form-group">
-                    <label for="url">URL del proyecto</label>
+                    <label for="description">descripción</label>
+                    <textarea id="description" name="description" rows="3" placeholder="qué hace el proyecto"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="url">url del proyecto</label>
                     <input type="url" id="url" name="url" placeholder="https://...">
                 </div>
                 <div class="form-group">
-                    <label for="repo_url">URL del repositorio</label>
+                    <label for="repo_url">url del repositorio</label>
                     <input type="url" id="repo_url" name="repo_url" placeholder="https://github.com/...">
                 </div>
                 <div class="form-group">
-                    <label for="image">Captura (PNG/JPG, máx 5MB)</label>
+                    <label for="image">captura (PNG/JPG, máx 5MB)</label>
                     <input type="file" id="image" name="image" accept=".png,.jpg,.jpeg">
                 </div>
-                <button type="submit">Crear proyecto</button>
+                <button type="submit">crear proyecto</button>
             </form>
         </section>
 
         <section class="projects-section">
-            <h2>Proyectos existentes</h2>
+            <h2>// proyectos existentes</h2>
             {% if projects %}
             <div class="admin-list">
                 {% for project in projects %}
@@ -51,59 +64,69 @@
                         <img src="/uploads/{{ project.image_url }}" alt="{{ project.title }}" class="thumb">
                         {% endif %}
                         <div>
+                            {% if project.category %}
+                            <div class="admin-category">{{ project.category }}</div>
+                            {% endif %}
                             <h3>{{ project.title }}</h3>
                             {% if project.description %}
                             <p>{{ project.description }}</p>
                             {% endif %}
                             <div class="links">
                                 {% if project.url %}
-                                <a href="{{ project.url }}" target="_blank" rel="noopener">Web</a>
+                                <a href="{{ project.url }}" target="_blank" rel="noopener">web</a>
                                 {% endif %}
                                 {% if project.repo_url %}
-                                <a href="{{ project.repo_url }}" target="_blank" rel="noopener">GitHub</a>
+                                <a href="{{ project.repo_url }}" target="_blank" rel="noopener">repo</a>
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                     <div class="admin-item-actions">
-                        <button class="btn-edit" onclick="toggleEdit({{ project.id }})">Editar</button>
+                        <button class="btn-edit" onclick="toggleEdit({{ project.id }})">editar</button>
                         <form method="POST" action="/projects/{{ project.id }}/delete" class="inline-form"
-                              onsubmit="return confirm('¿Estás seguro de eliminar este proyecto?')">
-                            <button type="submit" class="btn-delete">Eliminar</button>
+                              onsubmit="return confirm('¿Eliminar este proyecto?')">
+                            <button type="submit" class="btn-delete">eliminar</button>
                         </form>
                     </div>
 
                     <div id="edit-form-{{ project.id }}" class="edit-form" style="display:none;">
                         <form method="POST" action="/projects/{{ project.id }}/edit" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label>Título *</label>
+                                <label>título *</label>
                                 <input type="text" name="title" value="{{ project.title }}" required maxlength="200">
                             </div>
                             <div class="form-group">
-                                <label>Descripción</label>
+                                <label>categoría</label>
+                                <input type="text" name="category" value="{{ project.category or '' }}" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label>descripción</label>
                                 <textarea name="description" rows="3">{{ project.description or '' }}</textarea>
                             </div>
                             <div class="form-group">
-                                <label>URL del proyecto</label>
+                                <label>url del proyecto</label>
                                 <input type="url" name="url" value="{{ project.url or '' }}" placeholder="https://...">
                             </div>
                             <div class="form-group">
-                                <label>URL del repositorio</label>
+                                <label>url del repositorio</label>
                                 <input type="url" name="repo_url" value="{{ project.repo_url or '' }}" placeholder="https://github.com/...">
                             </div>
                             <div class="form-group">
-                                <label>Nueva captura (opcional)</label>
+                                <label>nueva captura (opcional)</label>
                                 <input type="file" name="image" accept=".png,.jpg,.jpeg">
                             </div>
-                            <button type="submit">Guardar cambios</button>
-                            <button type="button" onclick="toggleEdit({{ project.id }})">Cancelar</button>
+                            <button type="submit">guardar cambios</button>
+                            <button type="button" onclick="toggleEdit({{ project.id }})">cancelar</button>
                         </form>
                     </div>
                 </div>
                 {% endfor %}
             </div>
             {% else %}
-            <p class="empty">No hay proyectos</p>
+            <div class="empty-state">
+                <div class="empty-icon">[ ]</div>
+                <p>no hay proyectos</p>
+            </div>
             {% endif %}
         </section>
     </main>

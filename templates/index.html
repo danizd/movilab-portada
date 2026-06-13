@@ -3,51 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movilab - Side Projects</title>
+    <title>movilab — side projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <header>
-        <h1>movilab</h1>
-        <p>side projects</p>
-        <div class="nav">
-            <a href="/login">login</a>
-        </div>
-    </header>
+    <div id="particles-js"></div>
 
-    <main>
-        {% if projects %}
-        <div class="grid">
-            {% for project in projects %}
-            <div class="card">
-                {% if project.image_url %}
-                <img src="/uploads/{{ project.image_url }}" alt="{{ project.title }}">
-                {% else %}
-                <div class="no-image">sin imagen</div>
-                {% endif %}
-                <div class="card-content">
-                    <h2>{{ project.title }}</h2>
-                    {% if project.description %}
-                    <p>{{ project.description }}</p>
-                    {% endif %}
-                    <div class="links">
-                        {% if project.url %}
-                        <a href="{{ project.url }}" target="_blank" rel="noopener">web</a>
+    <div class="content-wrapper">
+        <header>
+            <div class="logo-mark">//</div>
+            <h1>movilab</h1>
+            <p class="tagline"><span class="accent">>&nbsp;</span>side projects &amp; experiments</p>
+            <div class="nav">
+                <a href="/login" class="nav-link">
+                    <span class="nav-dot"></span>
+                    admin
+                </a>
+            </div>
+        </header>
+
+        <main>
+            {% if projects %}
+            <div class="grid">
+                {% for project in projects %}
+                <div class="card">
+                    <div class="card-image">
+                        {% if project.image_url %}
+                        <img src="/uploads/{{ project.image_url }}" alt="{{ project.title }}">
+                        {% else %}
+                        <div class="no-image">
+                            <span>no_image.png</span>
+                        </div>
                         {% endif %}
-                        {% if project.repo_url %}
-                        <a href="{{ project.repo_url }}" target="_blank" rel="noopener">github</a>
+                        {% if project.category %}
+                        <span class="tag">{{ project.category }}</span>
                         {% endif %}
                     </div>
+                    <div class="card-content">
+                        <h2>{{ project.title }}</h2>
+                        {% if project.description %}
+                        <p>{{ project.description }}</p>
+                        {% endif %}
+                        <div class="links">
+                            {% if project.url %}
+                            <a href="{{ project.url }}" target="_blank" rel="noopener" class="btn-web">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                                web
+                            </a>
+                            {% endif %}
+                            {% if project.repo_url %}
+                            <a href="{{ project.repo_url }}" target="_blank" rel="noopener" class="btn-repo">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                repo
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-        {% else %}
-        <p class="empty">no hay proyectos aún</p>
-        {% endif %}
-    </main>
+            {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">[ ]</div>
+                <p>no hay proyectos aún</p>
+            </div>
+            {% endif %}
+        </main>
+
+        <footer>
+            <span class="footer-line"></span>
+            <p>movilab © 2026</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#00f0ff"
+                },
+                "shape": {
+                    "type": "circle"
+                },
+                "opacity": {
+                    "value": 0.3,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 0.6,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 2,
+                    "random": true,
+                    "anim": {
+                        "enable": true,
+                        "speed": 1.5,
+                        "size_min": 0.3,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#00f0ff",
+                    "opacity": 0.08,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 0.6,
+                    "direction": "none",
+                    "random": true,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": false
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 180,
+                        "line_linked": {
+                            "opacity": 0.2
+                        }
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
 </body>
 </html>
