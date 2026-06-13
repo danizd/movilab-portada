@@ -31,19 +31,33 @@
                 {% for project in projects %}
                 <div class="card">
                     <div class="card-image">
-                        {% if project.image_url %}
-                        <img src="/uploads/{{ project.image_url }}" alt="{{ project.title }}">
-                        {% else %}
-                        <div class="no-image">
-                            <span>no_image.png</span>
-                        </div>
+                        {% if project.url %}
+                        <a href="{{ project.url }}" target="_blank" rel="noopener" class="card-link">
+                        {% elif project.repo_url %}
+                        <a href="{{ project.repo_url }}" target="_blank" rel="noopener" class="card-link">
+                        {% endif %}
+                            {% if project.image_url %}
+                            <img src="/uploads/{{ project.image_url }}" alt="{{ project.title }}">
+                            {% else %}
+                            <div class="no-image">
+                                <span>no_image.png</span>
+                            </div>
+                            {% endif %}
+                        {% if project.url or project.repo_url %}
+                        </a>
                         {% endif %}
                         {% if project.category %}
                         <span class="tag">{{ project.category }}</span>
                         {% endif %}
                     </div>
                     <div class="card-content">
+                        {% if project.url %}
+                        <h2><a href="{{ project.url }}" target="_blank" rel="noopener">{{ project.title }}</a></h2>
+                        {% elif project.repo_url %}
+                        <h2><a href="{{ project.repo_url }}" target="_blank" rel="noopener">{{ project.title }}</a></h2>
+                        {% else %}
                         <h2>{{ project.title }}</h2>
+                        {% endif %}
                         {% if project.description %}
                         <p>{{ project.description }}</p>
                         {% endif %}
