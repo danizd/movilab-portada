@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movilab - Side Projects</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Movilab</h1>
+        <p>Side projects</p>
+    </header>
+
+    <main>
+        {% if projects %}
+        <div class="grid">
+            {% for project in projects %}
+            <div class="card">
+                {% if project.image_url %}
+                <img src="/uploads/{{ project.image_url }}" alt="{{ project.title }}">
+                {% else %}
+                <div class="no-image">Sin imagen</div>
+                {% endif %}
+                <div class="card-content">
+                    <h2>{{ project.title }}</h2>
+                    {% if project.description %}
+                    <p>{{ project.description }}</p>
+                    {% endif %}
+                    <div class="links">
+                        {% if project.url %}
+                        <a href="{{ project.url }}" target="_blank" rel="noopener">Web</a>
+                        {% endif %}
+                        {% if project.repo_url %}
+                        <a href="{{ project.repo_url }}" target="_blank" rel="noopener">GitHub</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="empty">No hay proyectos aún</p>
+        {% endif %}
+    </main>
+</body>
+</html>

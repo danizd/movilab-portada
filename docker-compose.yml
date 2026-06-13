@@ -1,0 +1,16 @@
+services:
+  movilab-portada:
+    build: .
+    container_name: movilab-portada
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - proxy_network
+
+networks:
+  proxy_network:
+    external: true
