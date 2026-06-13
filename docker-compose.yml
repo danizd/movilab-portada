@@ -4,12 +4,13 @@ services:
     container_name: movilab-portada
     restart: unless-stopped
     env_file: .env
-    ports:
-      - "${HOST_PORT:-8000}:${CONTAINER_PORT:-8000}"
     volumes:
-      - ./data:/app/data
+      - movilab_data:/app/data
     networks:
       - proxy_network
+
+volumes:
+  movilab_data:
 
 networks:
   proxy_network:
